@@ -15,6 +15,8 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from rest_framework.decorators import api_view
 import requests
 from docx import Document
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import permission_classes
 
 # Ruta base para almacenamiento de claves del sistema
 KEY_DIR = "keys"
@@ -69,6 +71,7 @@ def insertar_firma_en_docx(content, metadata):
 generate_key_pair()
 
 @api_view(["GET"])
+@permission_classes([AllowAny])
 def greynoise_lookup(request, ip):
     try:
         headers = {"key": "YOUR_GREYNOISE_API_KEY"}
