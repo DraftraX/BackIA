@@ -44,6 +44,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+MIDDLEWARE += [
+    'custom_auth.middleware.LastActivityMiddleware',
+]
 
 ROOT_URLCONF = 'backend.urls'
 

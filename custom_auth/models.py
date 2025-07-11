@@ -15,10 +15,9 @@ class CustomUser(AbstractUser):
     last_logout = models.DateTimeField(blank=True, null=True)
     total_session_time = models.DurationField(default=timedelta())
     last_activity = models.DateTimeField(blank=True, null=True)
-
-    # ✅ NUEVOS CAMPOS para controlar múltiples sesiones
-    nueva_solicitud = models.BooleanField(default=False)   # intento nuevo pendiente
-    permitir_nueva = models.BooleanField(default=False)    # esta sesión aprobó la nueva
+    
+    nueva_solicitud = models.BooleanField(default=False)   
+    permitir_nueva = models.BooleanField(default=False)    
 
     def __str__(self):
         return self.username

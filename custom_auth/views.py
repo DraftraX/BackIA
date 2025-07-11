@@ -161,10 +161,6 @@ def listar_usuarios_view(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def validate_session(request):
-    # print("🔒 AUTENTICADO:", request.user.is_authenticated)
-    # print("🧑 USER:", request.user)
-    # print("📦 HEADERS:", request.headers)
-    # print("🔐 SESSION TOKEN USUARIO:", request.user.session_token)
     client_token = request.headers.get('X-Session-Token')
     if not client_token or request.user.session_token != client_token:
         return Response({'detail': 'Sesión inválida o iniciada en otro dispositivo.'}, status=403)
