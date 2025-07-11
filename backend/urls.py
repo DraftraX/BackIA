@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/auth/', include('custom_auth.urls')),
     path('api/auth/login/', CustomLoginView.as_view(), name='login_view'),
     path('api/encriptador/', include('encriptador.urls')),
+    path('api/captcha/', include('captcha_verify.urls')),
 ]

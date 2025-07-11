@@ -26,17 +26,14 @@ def register_view(request):
         user = serializer.save()
         refresh = RefreshToken.for_user(user)
 
-        session_token = str(uuid.uuid4())
-        user.session_token = session_token
-        user.save()
-
+        # ❌ No generamos session_token aquí
         return Response({
             'user': UserSerializer(user).data,
             'refresh': str(refresh),
-            'access': str(refresh.access_token),
-            'session_token': session_token
+            'access': str(refresh.access_token)
         }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -46,19 +43,25 @@ def login_view(request):
     user = authenticate(request, username=username, password=password)
 
     if user:
+        
+        if user.session_token:
+            return Response(
+                {'error': 'Ya tienes una sesión activa. Cierra sesión en el otro dispositivo antes de volver a iniciar.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
         refresh = RefreshToken.for_user(user)
-
         session_token = str(uuid.uuid4())
         user.session_token = session_token
         user.last_login = timezone.now()
         user.save()
 
-        encrypted_user_id = encrypt_url(str(user.id))  # 🔐 Encriptamos ID
+        encrypted_user_id = encrypt_url(str(user.id))
 
         return Response({
             'user': {
                 **UserSerializer(user).data,
-                'id_encriptado': encrypted_user_id  # Se lo damos al frontend
+                'id_encriptado': encrypted_user_id
             },
             'refresh': str(refresh),
             'access': str(refresh.access_token),

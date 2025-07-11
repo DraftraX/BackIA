@@ -32,6 +32,9 @@ INSTALLED_APPS = [
     'seguridad',
     'deteccion',
     'encriptador',
+
+    # Captcha xdxd
+    'captcha_verify',
 ]
 
 MIDDLEWARE = [
@@ -145,4 +148,5 @@ EMAIL_HOST_USER = 'wmanuelga@gmail.com'
 EMAIL_HOST_PASSWORD = 'tdfl wpds epdk smqs' 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-
+# settings.py
+RECAPTCHA_SECRET_KEY = '6Le1z38rAAAAANqdgv9MDCutW5jnoY9l4mq7LvU3'
