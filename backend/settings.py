@@ -76,13 +76,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nids_bd',
-        'USER': 'postgres',
-        'PASSWORD': '72809055',
-        'HOST': 'localhost',
-        'PORT': '3310',
+        'NAME': 'nids_db_94je',
+        'USER': 'nids_db_94je_user',
+        'PASSWORD': 'jPjVoT6IcDpPfuq7KM4H5BK6Hd4zgTT8',
+        'HOST': 'dpg-d1ootmbuibrs73d1ari0-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
+
 
 # Password
 AUTH_PASSWORD_VALIDATORS = [
